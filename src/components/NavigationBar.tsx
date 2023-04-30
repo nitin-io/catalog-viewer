@@ -30,19 +30,18 @@ const NavigationBar: React.FC = () => {
   }, []);
 
   const handleNext = () => {
-    let poppedItem = posts.pop();
+    let poppedItem = posts.pop() as Post;
     posts.unshift(poppedItem);
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   };
 
   const handlePrev = () => {
-    let shiftedItem = posts.shift();
+    let shiftedItem = posts.shift() as Post;
     posts.push(shiftedItem);
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   };
 
   useEffect(() => {
-    console.log("calculated");
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   }, [posts]);
 
