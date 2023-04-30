@@ -17,26 +17,31 @@ const NavigationBar: React.FC = () => {
   const { setActiveCatalog } = useCatalogContext();
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Get Data and Set it to posts
   useEffect(() => {
     setPosts(data);
   }, []);
 
+  // Chenge to Next Image
   const handleNext = () => {
     let poppedItem = posts.pop() as Post;
     posts.unshift(poppedItem);
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   };
 
+  // Change to Prev Image
   const handlePrev = () => {
     let shiftedItem = posts.shift() as Post;
     posts.push(shiftedItem);
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   };
 
+  // Set Image to show initially
   useEffect(() => {
     setActiveCatalog(posts[Math.floor(posts.length / 2)]);
   }, [posts]);
 
+  // Autoplay slideshow using setInterval function
   useEffect(() => {
     let interval: NodeJS.Timeout | unknown = null;
     if (isPlaying) {
@@ -62,11 +67,12 @@ const NavigationBar: React.FC = () => {
           className="navigation-bar"
           id="navigation"
         >
-          <PlayArrowIcon
-            style={{ transform: "rotate(180deg)" }}
-            onClick={handlePrev}
-            className="navigation-btn"
-          />
+          <button className="btn">
+            <PlayArrowIcon
+              style={{ transform: "rotate(180deg)" }}
+              onClick={handlePrev}
+            />
+          </button>
           {posts?.map((item) => {
             return (
               <Grid
@@ -84,7 +90,9 @@ const NavigationBar: React.FC = () => {
               ></Grid>
             );
           })}
-          <PlayArrowIcon onClick={handleNext} className="navigation-btn" />
+          <button onClick={handleNext} className="btn">
+            <PlayArrowIcon className="navigation-btn" />
+          </button>
         </Grid>
       </Grid>
       <Grid
@@ -95,17 +103,22 @@ const NavigationBar: React.FC = () => {
         alignItems="center"
         className="play-btn-container"
       >
+        {/* Autoslide Play */}
         <Typography align="center">
           {isPlaying ? (
-            <PauseCircleFilled
-              sx={{ fontSize: 60, color: "#25BEDA" }}
-              onClick={() => setIsPlaying(!isPlaying)}
-            />
+            <button className="btn">
+              <PauseCircleFilled
+                sx={{ fontSize: 60, color: "#25BEDA" }}
+                onClick={() => setIsPlaying(!isPlaying)}
+              />
+            </button>
           ) : (
-            <PlayCircleIcon
-              sx={{ fontSize: 60, color: "#25BEDA" }}
-              onClick={() => setIsPlaying(!isPlaying)}
-            />
+            <button className="btn">
+              <PlayCircleIcon
+                sx={{ fontSize: 60, color: "#25BEDA" }}
+                onClick={() => setIsPlaying(!isPlaying)}
+              />
+            </button>
           )}
         </Typography>
       </Grid>

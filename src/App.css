@@ -11,6 +11,11 @@ p {
   color: #b4b3b3;
 }
 
+.btn {
+  border: none;
+  background: transparent;
+}
+
 .detail-container {
   padding: 1rem 4rem 0 1rem;
   margin-left: 2rem;
@@ -33,10 +38,6 @@ p {
 
 .navigation-bar {
   min-height: 18vh;
-}
-
-.navigation-btn {
-  color: #000000;
 }
 
 .navigation-bar > .nav-btn:not(:nth-child(4)) {
