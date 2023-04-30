@@ -1,33 +1,20 @@
-import { useState } from "react";
 import ImageAndDetails from "./components/ImageAndDetails";
-import { Grid, Typography } from "@mui/material";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
-import "./App.css";
-import NavigationBar from "./components/NavigationBar";
+import { Grid } from "@mui/material";
 
-interface Post {
-  title: string;
-  content: string;
-  imageURL: string;
-}
+import "./App.css";
+import { useCatalogContext } from "./components/CatalogContext";
 
 const App: React.FC = () => {
-  const [activeCatalog, setActiveCatalog] = useCatalogContext();
+  const { activeCatalog } = useCatalogContext();
 
   return (
     <>
-      <Grid container>
+      <Grid container style={{ marginTop: "20px" }}>
         <ImageAndDetails
-          title={activeCatalog.title}
-          content={activeCatalog.content}
-          imageURL={activeCatalog.imageURL}
+          title={activeCatalog?.title}
+          content={activeCatalog?.content}
+          imageURL={activeCatalog?.imageURL}
         />
-        <NavigationBar />
-        <Grid item md={4} justifyContent="center" alignItems="center">
-          <Typography align="center">
-            <PlayCircleIcon sx={{ fontSize: 60, color: "#25BEDA" }} />
-          </Typography>
-        </Grid>
       </Grid>
     </>
   );

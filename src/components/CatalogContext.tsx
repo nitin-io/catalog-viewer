@@ -6,25 +6,42 @@ interface Catalog {
   imageURL: string;
 }
 
-const activeCatalogContext = createContext({} as Catalog);
+interface CatalogContextType {
+  activeCatalog: Catalog;
+  setActiveCatalog: React.Dispatch<React.SetStateAction<Catalog>>;
+}
 
-const ActiveCatalogProvider = ({ children }: { children: React.ReactNode }) => {
+const activeCatalogContext = createContext<CatalogContextType>({
+  activeCatalog: {
+    title: "",
+    content: "",
+    imageURL: "",
+  },
+  setActiveCatalog: () => {},
+});
+
+interface ProviderProps {
+  children: React.ReactNode;
+}
+
+export const ActiveCatalogProvider: React.FC<ProviderProps> = ({
+  children,
+}) => {
   const [activeCatalog, setActiveCatalog] = useState<Catalog>({
     title: "",
     content: "",
     imageURL: "",
   });
+
+  const catalogContext = { activeCatalog, setActiveCatalog };
+
   return (
     <>
-      <activeCatalogContext.Provider
-        value={{ activeCatalog, setActiveCatalog }}
-      >
+      <activeCatalogContext.Provider value={catalogContext}>
         {children}
       </activeCatalogContext.Provider>
     </>
   );
 };
 
-export const useCatalogContext = useContext(activeCatalogContext);
-
-export default ActiveCatalogProvider;
+export const useCatalogContext = () => useContext(activeCatalogContext);

@@ -8,16 +8,22 @@ body {
 
 p {
   font-size: 0.73rem;
+  color: #b4b3b3;
 }
 
 .detail-container {
-  padding: 0.3rem 4rem 0 1rem;
+  padding: 1rem 4rem 0 1rem;
   margin: 2rem 0;
   margin-left: 2rem;
+  min-height: 80vh;
+}
+
+.detail-container h1 {
+  color: #707070;
 }
 
 .image-container {
-  padding: 2rem;
+  padding: 1rem 3rem 0;
 }
 
 .image-container img {
@@ -27,5 +33,25 @@ p {
 }
 
 .navigation-bar {
-  margin-bottom: 1.2rem;
+  min-height: 18vh;
+}
+
+.navigation-btn {
+  color: #000000;
+}
+
+.navigation-bar > .btn:not(:nth-child(4)) {
+  filter: grayscale(100%);
+}
+
+@media screen and (max-width: 900px) {
+  .detail-container {
+    min-height: 50vh;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .image-container img {
+    border-radius: 2rem;
+  }
 }

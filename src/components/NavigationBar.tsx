@@ -12,7 +12,7 @@ interface Post {
 
 const NavigationBar: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [activeCatalog, setActiveCatalog] = useCatalogContext();
+  const { setActiveCatalog } = useCatalogContext();
 
   const imageStyling = {
     width: "150%",
@@ -29,21 +29,44 @@ const NavigationBar: React.FC = () => {
     setPosts(data);
   }, []);
 
+  const handleNext = () => {
+    let poppedItem = posts.pop();
+    posts.unshift(poppedItem);
+    setActiveCatalog(posts[Math.floor(posts.length / 2)]);
+  };
+
+  const handlePrev = () => {
+    let shiftedItem = posts.shift();
+    posts.push(shiftedItem);
+    setActiveCatalog(posts[Math.floor(posts.length / 2)]);
+  };
+
+  useEffect(() => {
+    console.log("calculated");
+    setActiveCatalog(posts[Math.floor(posts.length / 2)]);
+  }, [posts]);
+
   return (
     <>
-      <Grid item md={8} justifyContent={"center"} alignItems={"center"}>
+      <Grid item>
         <Grid
           container
           justifyContent={"center"}
           alignItems={"center"}
           className="navigation-bar"
+          id="navigation"
         >
-          <PlayArrowIcon style={{ transform: "rotate(180deg)" }} />
+          <PlayArrowIcon
+            style={{ transform: "rotate(180deg)" }}
+            onClick={handlePrev}
+            className="navigation-btn"
+          />
           {posts?.map((item) => {
             return (
               <Grid
                 item
                 md={2}
+                xs={1}
                 style={{
                   ...imageStyling,
                   backgroundImage: `url(  ${item.imageURL})`,
@@ -55,7 +78,7 @@ const NavigationBar: React.FC = () => {
               ></Grid>
             );
           })}
-          <PlayArrowIcon />
+          <PlayArrowIcon onClick={handleNext} className="navigation-btn" />
         </Grid>
       </Grid>
     </>
