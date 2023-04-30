@@ -13,9 +13,8 @@ p {
 
 .detail-container {
   padding: 1rem 4rem 0 1rem;
-  margin: 2rem 0;
   margin-left: 2rem;
-  min-height: 80vh;
+  min-height: 74vh;
 }
 
 .detail-container h1 {
@@ -40,13 +39,29 @@ p {
   color: #000000;
 }
 
-.navigation-bar > .btn:not(:nth-child(4)) {
+.navigation-bar > .nav-btn:not(:nth-child(4)) {
   filter: grayscale(100%);
+}
+
+.nav-btn {
+  width: 8rem;
+  height: 6rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 0.5rem;
+}
+
+.play-btn-container {
+  padding: 2.5rem;
 }
 
 @media screen and (max-width: 900px) {
   .detail-container {
     min-height: 50vh;
+  }
+  .nav-btn {
+    width: 12rem;
   }
 }
 
